@@ -103,6 +103,19 @@
       <artifactId>jscience</artifactId>
       <version>4.3.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-test-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.skyscreamer</groupId>
+      <artifactId>jsonassert</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

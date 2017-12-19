@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.model.Post;
-import com.in28minutes.springboot.service.PostService;
+import com.example.service.PostService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
@@ -106,8 +106,7 @@ public class PostControllerTest {
                 .getContentAsString(), false);
     }
 
-    @Test//Returning 204 instead of 201 in test.
-    //Not understanding the JSon? interpreting it as null?
+    @Test
     public void testAddPost() throws Exception {
 
         Mockito.when(
@@ -164,7 +163,7 @@ public class PostControllerTest {
         Assert.assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
     }
 
-    @Test//Fails 404 when it should be 204
+    @Test
     public void testUpdatePostExisting() throws Exception {
         Mockito.when(
                 postService.updatePost(Mockito.anyLong(), Mockito.any(Post.class))).thenReturn(true);
