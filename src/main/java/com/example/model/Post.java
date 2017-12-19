@@ -12,6 +12,7 @@ public class Post {
     private String content;
     private String editedTime;
     private String userName;
+    private boolean display=true;
 
     public Post()
     {
@@ -29,7 +30,8 @@ public class Post {
 
     public Post(long passedPostId, long passedUserId,
                 long passedThreadId, String passedTimestamp,
-                String passedContent, String passedEditedTime, String passedUserName){
+                String passedContent, String passedEditedTime,
+                String passedUserName, boolean passedDisplay){
         postId=passedPostId;
         userId=passedUserId;
         threadId=passedThreadId;
@@ -37,6 +39,7 @@ public class Post {
         content=passedContent;
         editedTime=passedEditedTime;
         userName=passedUserName;
+        display=passedDisplay;
     }
 
     public long getPostId() {
@@ -78,6 +81,31 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getEditedTime() {
+        return editedTime;
+    }
+
+    public void setEditedTime(String editedTime) {
+        this.editedTime = editedTime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public boolean isDisplay() {
+        return display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
+
 
     @Override
     public String toString() {
