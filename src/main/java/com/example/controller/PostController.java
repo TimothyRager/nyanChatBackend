@@ -16,16 +16,19 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @CrossOrigin
     @GetMapping("/posts/{postId}")
     public Post getPost(@PathVariable long postId) {
         return postService.getPost(postId);
     }
 
+    @CrossOrigin
     @GetMapping("/posts")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
 
+    @CrossOrigin
     @PostMapping("/posts")
     public ResponseEntity<Void> addPost(@RequestBody Post newPost){
 
@@ -41,6 +44,7 @@ public class PostController {
         return (ResponseEntity.created(location).build());
     }
 
+    @CrossOrigin
     @DeleteMapping("/posts/{postId}")
     public ResponseEntity<Void> deletePost(@PathVariable long postId){
         boolean success = postService.deletePost(postId);
@@ -52,6 +56,7 @@ public class PostController {
         return (ResponseEntity.status(204).build());
     }
 
+    @CrossOrigin
     @PutMapping("/posts/{postId}")
     public ResponseEntity<Void> updatePost(@PathVariable long postId, @RequestBody Post newPost){
         boolean success = postService.updatePost(postId, newPost);
