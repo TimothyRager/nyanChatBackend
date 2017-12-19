@@ -10,6 +10,8 @@ public class Post {
     private long threadId;
     private String timestamp;
     private String content;
+    private String editedTime;
+    private String userName;
 
     public Post()
     {

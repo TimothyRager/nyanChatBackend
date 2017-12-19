@@ -16,10 +16,10 @@
 
 package com.example;
 
-//import static javax.measure.unit.SI.KILOGRAM;
-//import javax.measure.quantity.Mass;
-//import org.jscience.physics.model.RelativisticModel;
-//import org.jscience.physics.amount.Amount;
+import static javax.measure.unit.SI.KILOGRAM;
+import javax.measure.quantity.Mass;
+import org.jscience.physics.model.RelativisticModel;
+import org.jscience.physics.amount.Amount;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -43,8 +43,8 @@ import java.util.Map;
 @SpringBootApplication
 public class Main {
 
-//  @Value("${spring.datasource.url}")
-//  private String dbUrl;
+  @Value("${spring.datasource.url}")
+  private String dbUrl;
 
 //  @Autowired
 //  private DataSource dataSource;
@@ -58,8 +58,8 @@ public class Main {
     return "index";
   }
 
-//  @RequestMapping("/db")
-//  String db(Map<String, Object> model) {
+  @RequestMapping("/db")
+  String db(Map<String, Object> model) {
 //    try (Connection connection = dataSource.getConnection()) {
 //      Statement stmt = connection.createStatement();
 //      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
@@ -77,7 +77,8 @@ public class Main {
 //      model.put("message", e.getMessage());
 //      return "error";
 //    }
-//  }
+    return "default";
+  }
 
 //  @RequestMapping("/hello")
 //  String hello(Map<String, Object> model) {
@@ -87,15 +88,15 @@ public class Main {
 //    return "hello";
 //  }
 
-//  @Bean
-//  public DataSource dataSource() throws SQLException {
-//    if (dbUrl == null || dbUrl.isEmpty()) {
-//      return new HikariDataSource();
-//    } else {
-//      HikariConfig config = new HikariConfig();
-//      config.setJdbcUrl(dbUrl);
-//      return new HikariDataSource(config);
-//    }
-//  }
+  @Bean
+  public DataSource dataSource() throws SQLException {
+    if (dbUrl == null || dbUrl.isEmpty()) {
+      return new HikariDataSource();
+    } else {
+      HikariConfig config = new HikariConfig();
+      config.setJdbcUrl(dbUrl);
+      return new HikariDataSource(config);
+    }
+  }
 
 }
