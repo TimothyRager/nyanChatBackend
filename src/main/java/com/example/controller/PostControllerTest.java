@@ -38,17 +38,6 @@ public class PostControllerTest {
     public void preGame() {
         ArrayList<Post> posts = new ArrayList<>();
 
-        post1 = new Post(1, 1, 1, "", "User1, Thread1, HAHAHAH");
-        post2 = new Post(2, 2, 1, "", "User2, Thread1, What\"s so funny?");
-        post3 = new Post(3, 3, 1, "", "User3, Thread1, You didn\"t hear?");
-        post4 = new Post(4, 4, 1, "", "User4, Thread1, Oh, about Bob?");
-        post5 = new Post(5, 5, 1, "", "User5, Thread1, What about Bob?");
-        post6 = new Post(6, 4, 1, "", "User4, Thread1, Bob Marley?");
-        post7 = new Post(7, 3, 1, "", "User3, Thread1, Bob Sagget?");
-        post8 = new Post(8, 2, 1, "", "User2, Thread1, Uncle Bob?");
-        post9 = new Post(9, 1, 1, "", "User1, Thread1, Yo, noone talks about Uncle Bob...");
-        posts.add(post1);
-        posts.add(post2);
     }
 
     Post post1;
@@ -60,11 +49,11 @@ public class PostControllerTest {
     Post post7;
     Post post8;
     Post post9;
-    Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content");
-    Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again");
+    Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft");
+    Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft");
     ArrayList<Post> mockPosts = new ArrayList<>(Arrays.asList(mockPost, mockPost2));
 
-    String examplePostJson = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\"}";
+    String examplePostJson = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"editTime\":\"EditTime\", \"userName\": \"TimNeversoft\"}";
 
     @Test
     public void testGetPostById() throws Exception {
