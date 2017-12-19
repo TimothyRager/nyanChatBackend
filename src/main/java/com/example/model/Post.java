@@ -1,38 +1,28 @@
 package com.example.model;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Component
+@Entity
 public class Post {
 
+    @Id
+    @GeneratedValue
     private long postId;
-    private long userId;
-    private long threadId;
-    private String timestamp;
+
     private String content;
+    private long threadId;
+    private long userId;
+    private String timestamp;
 
-    public Post()
-    {
-    }
+    public Post() {}
 
-//    public Post(String postAsJson){
-//        Gson gson = new Gson();
-//        Post post = gson.fromJson(postAsJson, Post.class);
-//        this.postId=post.getPostId();
-//        this.userId=post.getUserId();
-//        this.threadId=post.getThreadId();
-//        this.timestamp=post.getTimestamp();
-//        this.content=post.getContent();
-//    }
-
-    public Post(long passedPostId, long passedUserId,
-                long passedThreadId, String passedTimestamp,
-                String passedContent){
-        postId=passedPostId;
-        userId=passedUserId;
-        threadId=passedThreadId;
-        timestamp=passedTimestamp;
-        content=passedContent;
+    public Post(String content, long threadId, long userId, String timestamp) {
+        this.content = content;
+        this.threadId = threadId;
+        this.userId = userId;
+        this.timestamp = timestamp;
     }
 
     public long getPostId() {
@@ -43,12 +33,12 @@ public class Post {
         this.postId = postId;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getContent() {
+        return content;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public long getThreadId() {
@@ -59,6 +49,14 @@ public class Post {
         this.threadId = threadId;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
     public String getTimestamp() {
         return timestamp;
     }
@@ -66,20 +64,4 @@ public class Post {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Post [postId=%d, userId=%d, threadId=%d, timestamp=%s, content=%s]", postId,
-                userId, threadId, timestamp, content);
-    }
-
 }
