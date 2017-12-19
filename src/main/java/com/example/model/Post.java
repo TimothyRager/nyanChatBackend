@@ -29,12 +29,14 @@ public class Post {
 
     public Post(long passedPostId, long passedUserId,
                 long passedThreadId, String passedTimestamp,
-                String passedContent){
+                String passedContent, String passedEditedTime, String passedUserName){
         postId=passedPostId;
         userId=passedUserId;
         threadId=passedThreadId;
         timestamp=passedTimestamp;
         content=passedContent;
+        editedTime=passedEditedTime;
+        userName=passedUserName;
     }
 
     public long getPostId() {
