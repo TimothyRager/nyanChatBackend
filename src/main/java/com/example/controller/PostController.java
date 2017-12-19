@@ -45,7 +45,7 @@ public class PostController {
             HttpHeaders responseHeaders = new HttpHeaders();
             URI newPollUri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
-                    .path("/{id}")
+                    .path("/{postId}")
                     .buildAndExpand(post.getPostId())
                     .toUri();
             responseHeaders.setLocation(newPollUri);

@@ -1,13 +1,13 @@
 package com.example.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="posts")
 public class Post {
 
     @Id
+    @Column(name="postId")
     @GeneratedValue
     private long postId;
 
