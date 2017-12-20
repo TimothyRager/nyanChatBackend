@@ -1,7 +1,7 @@
-package com.example.controller;
+package Rager.Timothy.controller;
 
-import com.example.model.Post;
-import com.example.service.PostService;
+import Rager.Timothy.model.Message;
+import Rager.Timothy.service.MessageService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
@@ -25,41 +25,41 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = PostController.class, secure = false)
-public class PostControllerTest {
+@WebMvcTest(value = MessageController.class, secure = false)
+public class MessageControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private PostService postService;
+    private MessageService messageService;
 
     @Before
     public void preGame() {
-        ArrayList<Post> posts = new ArrayList<>();
+        ArrayList<Message> messages = new ArrayList<>();
 
     }
 
-    Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft", true);
-    Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft", true);
-    ArrayList<Post> mockPosts = new ArrayList<>(Arrays.asList(mockPost, mockPost2));
+    Message mockMessage = new Message(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft", true);
+    Message mockMessage2 = new Message(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft", true);
+    ArrayList<Message> mockMessages = new ArrayList<>(Arrays.asList(mockMessage, mockMessage2));
 
-    String examplePostJson = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"editTime\":\"EditTime\", \"userName\": \"TimNeversoft\", \"display\": true}";
+    String exampleMessageJson = "{\"messageId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"editTime\":\"EditTime\", \"userName\": \"TimNeversoft\", \"display\": true}";
 
     @Test
-    public void testGetPostById() throws Exception {
+    public void testGetMessageById() throws Exception {
 
         Mockito.when(
-                postService.getPost(Mockito.anyLong())).thenReturn(mockPost);
+                messageService.getMessage(Mockito.anyLong())).thenReturn(mockMessage);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-                "/posts/-100").accept(
+                "/messages/-100").accept(
                 MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"display\": true}";
+        String expected = "{\"messageId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"display\": true}";
 
 
         JSONAssert.assertEquals(expected, result.getResponse()
@@ -67,19 +67,19 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testGetAllPosts() throws Exception {
+    public void testGetAllMessages() throws Exception {
 
         Mockito.when(
-                postService.getAllPosts()).thenReturn(mockPosts);
+                messageService.getAllMessages()).thenReturn(mockMessages);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get(
-                "/posts").accept(
+                "/messages").accept(
                 MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "[{\"postId\":-100,\"userId\":-100,\"threadId\":-100,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content\", \"display\": true},{\"postId\":-101,\"userId\":-101,\"threadId\":-101,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content Again\", \"display\": true}]";
+        String expected = "[{\"messageId\":-100,\"userId\":-100,\"threadId\":-100,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content\", \"display\": true},{\"messageId\":-101,\"userId\":-101,\"threadId\":-101,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content Again\", \"display\": true}]";
 
 
         JSONAssert.assertEquals(expected, result.getResponse()
@@ -87,14 +87,14 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testAddPost() throws Exception {
+    public void testAddMessage() throws Exception {
 
         Mockito.when(
-                postService.addPost(Mockito.any(Post.class))).thenReturn(true);
+                messageService.addMessage(Mockito.any(Message.class))).thenReturn(true);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/posts")
-                .accept(MediaType.APPLICATION_JSON).content(examplePostJson)
+                .post("/messages")
+                .accept(MediaType.APPLICATION_JSON).content(exampleMessageJson)
                 .contentType(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -103,19 +103,19 @@ public class PostControllerTest {
 
         Assert.assertEquals(HttpStatus.CREATED.value(), response.getStatus());
 
-        Assert.assertEquals("http://localhost/posts/-100",
+        Assert.assertEquals("http://localhost/messages/-100",
                 response.getHeader(HttpHeaders.LOCATION));
     }
 
     @Test
-    public void testDeletePostExisting() throws Exception {
+    public void testDeleteMessageExisting() throws Exception {
 
         Mockito.when(
-                postService.deletePost(Mockito.anyLong())).thenReturn(true);
+                messageService.deleteMessage(Mockito.anyLong())).thenReturn(true);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete("/posts/1");/*
-                .accept(MediaType.APPLICATION_JSON).content(examplePostJson)
+                .delete("/messages/1");/*
+                .accept(MediaType.APPLICATION_JSON).content(exampleMessageJson)
                 .contentType(MediaType.APPLICATION_JSON);*/
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -126,14 +126,14 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testDeletePostNotExisting() throws Exception {
+    public void testDeleteMessageNotExisting() throws Exception {
 
         Mockito.when(
-                postService.deletePost(Mockito.anyLong())).thenReturn(false);
+                messageService.deleteMessage(Mockito.anyLong())).thenReturn(false);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .delete("/posts/999");/*
-                .accept(MediaType.APPLICATION_JSON).content(examplePostJson)
+                .delete("/messages/999");/*
+                .accept(MediaType.APPLICATION_JSON).content(exampleMessageJson)
                 .contentType(MediaType.APPLICATION_JSON);*/
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -144,13 +144,13 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testUpdatePostExisting() throws Exception {
+    public void testUpdateMessageExisting() throws Exception {
         Mockito.when(
-                postService.updatePost(Mockito.anyLong(), Mockito.any(Post.class))).thenReturn(true);
+                messageService.updateMessage(Mockito.anyLong(), Mockito.any(Message.class))).thenReturn(true);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .put("/posts/-100")
-                .accept(MediaType.APPLICATION_JSON).content(examplePostJson)
+                .put("/messages/-100")
+                .accept(MediaType.APPLICATION_JSON).content(exampleMessageJson)
                 .contentType(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
@@ -161,13 +161,13 @@ public class PostControllerTest {
     }
 
     @Test
-    public void testUpdatePostNotExisting() throws Exception {
+    public void testUpdateMessageNotExisting() throws Exception {
         Mockito.when(
-                postService.updatePost(Mockito.anyLong(),Mockito.any(Post.class))).thenReturn(false);
+                messageService.updateMessage(Mockito.anyLong(),Mockito.any(Message.class))).thenReturn(false);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .put("/posts/999")
-                .accept(MediaType.APPLICATION_JSON).content(examplePostJson)
+                .put("/messages/999")
+                .accept(MediaType.APPLICATION_JSON).content(exampleMessageJson)
                 .contentType(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
