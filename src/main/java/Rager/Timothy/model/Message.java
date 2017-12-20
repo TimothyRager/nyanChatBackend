@@ -1,4 +1,4 @@
-package com.example.model;
+package Rager.Timothy.model;
 
 import org.springframework.stereotype.Component;
 
@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Component
-public class Post {
+public class Message {
 
     @Id
-    private long postId;
+    private long messageId;
 
-    static long postIdSeed=0;
+    private static long messageIdSeed=0;
     private long userId;
     private long threadId;
     private String timestamp;
@@ -22,27 +22,27 @@ public class Post {
     private String userName;
     private boolean display=true;
 
-    public Post()
+    public Message()
     {
-        postId=postIdSeed;
-        postIdSeed++;
+        messageId=messageIdSeed;
+        messageIdSeed++;
     }
 
-//    public Post(String postAsJson){
+//    public message(String messageAsJson){
 //        Gson gson = new Gson();
-//        Post post = gson.fromJson(postAsJson, Post.class);
-//        this.postId=post.getPostId();
-//        this.userId=post.getUserId();
-//        this.threadId=post.getThreadId();
-//        this.timestamp=post.getTimestamp();
-//        this.content=post.getContent();
+//        Message message = gson.fromJson(messageAsJson, Message.class);
+//        this.messageId=message.getMessageId();
+//        this.userId=message.getUserId();
+//        this.threadId=message.getThreadId();
+//        this.timestamp=message.getTimestamp();
+//        this.content=message.getContent();
 //    }
 
-    public Post(long passedPostId, long passedUserId,
-                long passedThreadId, String passedTimestamp,
-                String passedContent, String passedEditedTime,
-                String passedUserName, boolean passedDisplay){
-        postId=passedPostId;
+    public Message(long passedMessageId, long passedUserId,
+                   long passedThreadId, String passedTimestamp,
+                   String passedContent, String passedEditedTime,
+                   String passedUserName, boolean passedDisplay){
+        messageId=passedMessageId;
         userId=passedUserId;
         threadId=passedThreadId;
         timestamp=passedTimestamp;
@@ -52,12 +52,12 @@ public class Post {
         display=passedDisplay;
     }
 
-    public long getPostId() {
-        return postId;
+    public long getMessageId() {
+        return messageId;
     }
 
-    public void setPostId(long postId) {
-        this.postId = postId;
+    public void setMessageId(long messageId) {
+        this.messageId = messageId;
     }
 
     public long getUserId() {
@@ -120,7 +120,7 @@ public class Post {
     @Override
     public String toString() {
         return String.format(
-                "Post [postId=%d, userId=%d, threadId=%d, timestamp=%s, content=%s]", postId,
+                "Message [messageId=%d, userId=%d, threadId=%d, timestamp=%s, content=%s]", messageId,
                 userId, threadId, timestamp, content);
     }
 
