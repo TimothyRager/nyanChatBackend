@@ -2,10 +2,19 @@ package com.example.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 @Component
 public class Post {
 
+    @Id
+    @SequenceGenerator(name="postSeq", sequenceName="Post_Sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="postSeq")
     private long postId;
+
     private long userId;
     private long threadId;
     private String timestamp;

@@ -39,7 +39,7 @@ public class PostControllerTest {
         ArrayList<Post> posts = new ArrayList<>();
 
     }
-    
+
     Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft", true);
     Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft", true);
     ArrayList<Post> mockPosts = new ArrayList<>(Arrays.asList(mockPost, mockPost2));
