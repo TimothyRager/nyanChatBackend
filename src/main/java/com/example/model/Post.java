@@ -11,10 +11,9 @@ import javax.persistence.SequenceGenerator;
 public class Post {
 
     @Id
-    //@SequenceGenerator//(name="postSeq", sequenceName="Post_Sequence", allocationSize = 1)
-    @GeneratedValue//(strategy = GenerationType.SEQUENCE, generator="postSeq")
     private long postId;
 
+    static long postIdSeed=0;
     private long userId;
     private long threadId;
     private String timestamp;
@@ -25,6 +24,8 @@ public class Post {
 
     public Post()
     {
+        postId=postIdSeed;
+        postIdSeed++;
     }
 
 //    public Post(String postAsJson){
