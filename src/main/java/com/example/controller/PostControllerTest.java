@@ -39,21 +39,12 @@ public class PostControllerTest {
         ArrayList<Post> posts = new ArrayList<>();
 
     }
-
-    Post post1;
-    Post post2;
-    Post post3;
-    Post post4;
-    Post post5;
-    Post post6;
-    Post post7;
-    Post post8;
-    Post post9;
-    Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft");
-    Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft");
+    
+    Post mockPost = new Post(-100, -100, -100, "TimeyWimey", "Some Test Content", "EditTime", "TimNeversoft", true);
+    Post mockPost2 = new Post(-101, -101, -101, "TimeyWimey", "Some Test Content Again", "EditTime", "TimNeversoft", true);
     ArrayList<Post> mockPosts = new ArrayList<>(Arrays.asList(mockPost, mockPost2));
 
-    String examplePostJson = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"editTime\":\"EditTime\", \"userName\": \"TimNeversoft\"}";
+    String examplePostJson = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"editTime\":\"EditTime\", \"userName\": \"TimNeversoft\", \"display\": true}";
 
     @Test
     public void testGetPostById() throws Exception {
@@ -68,7 +59,7 @@ public class PostControllerTest {
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\"}";
+        String expected = "{\"postId\": -100, \"userId\": -100, \"threadId\": -100, \"timestamp\": \"TimeyWimey\", \"content\": \"Some Test Content\", \"display\": true}";
 
 
         JSONAssert.assertEquals(expected, result.getResponse()
@@ -88,7 +79,7 @@ public class PostControllerTest {
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
         System.out.println(result.getResponse());
-        String expected = "[{\"postId\":-100,\"userId\":-100,\"threadId\":-100,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content\"},{\"postId\":-101,\"userId\":-101,\"threadId\":-101,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content Again\"}]";
+        String expected = "[{\"postId\":-100,\"userId\":-100,\"threadId\":-100,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content\", \"display\": true},{\"postId\":-101,\"userId\":-101,\"threadId\":-101,\"timestamp\":\"TimeyWimey\",\"content\":\"Some Test Content Again\", \"display\": true}]";
 
 
         JSONAssert.assertEquals(expected, result.getResponse()
@@ -172,7 +163,7 @@ public class PostControllerTest {
     @Test
     public void testUpdatePostNotExisting() throws Exception {
         Mockito.when(
-                postService.updatePost(1,post3)).thenReturn(false);
+                postService.updatePost(Mockito.anyLong(),Mockito.any(Post.class))).thenReturn(false);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .put("/posts/999")
