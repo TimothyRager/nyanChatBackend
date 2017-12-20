@@ -11,8 +11,8 @@ import javax.persistence.SequenceGenerator;
 public class Post {
 
     @Id
-    @SequenceGenerator(name="postSeq", sequenceName="Post_Sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="postSeq")
+    //@SequenceGenerator//(name="postSeq", sequenceName="Post_Sequence", allocationSize = 1)
+    @GeneratedValue//(strategy = GenerationType.SEQUENCE, generator="postSeq")
     private long postId;
 
     private long userId;
