@@ -18,38 +18,18 @@ public class Message {
     private long threadId;
     private String timestamp;
     private String content;
-    private String editedTime;
-    private String userName;
-    private boolean display=true;
 
-    public Message()
-    {
+    public Message() {
         messageId=messageIdSeed;
         messageIdSeed++;
     }
 
-//    public message(String messageAsJson){
-//        Gson gson = new Gson();
-//        Message message = gson.fromJson(messageAsJson, Message.class);
-//        this.messageId=message.getMessageId();
-//        this.userId=message.getUserId();
-//        this.threadId=message.getThreadId();
-//        this.timestamp=message.getTimestamp();
-//        this.content=message.getContent();
-//    }
-
-    public Message(long passedMessageId, long passedUserId,
-                   long passedThreadId, String passedTimestamp,
-                   String passedContent, String passedEditedTime,
-                   String passedUserName, boolean passedDisplay){
+    public Message(long passedMessageId, long passedUserId, long passedThreadId, String passedTimestamp, String passedContent){
         messageId=passedMessageId;
         userId=passedUserId;
         threadId=passedThreadId;
         timestamp=passedTimestamp;
         content=passedContent;
-        editedTime=passedEditedTime;
-        userName=passedUserName;
-        display=passedDisplay;
     }
 
     public long getMessageId() {
@@ -91,31 +71,6 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public String getEditedTime() {
-        return editedTime;
-    }
-
-    public void setEditedTime(String editedTime) {
-        this.editedTime = editedTime;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public boolean isDisplay() {
-        return display;
-    }
-
-    public void setDisplay(boolean display) {
-        this.display = display;
-    }
-
 
     @Override
     public String toString() {
