@@ -1,15 +1,31 @@
 package Rager.Timothy.service;
 
+import Rager.Timothy.controller.SSEController;
 import Rager.Timothy.model.Message;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-@Service
+@Component
 public class MessageService {
 
     private static List<Message> messages = new ArrayList<>();
+
+    public void updateMainChat(Message message) {
+        CopyOnWriteArrayList<SseEmitter> sseEmittersToRemove = new CopyOnWriteArrayList<>();
+
+        SSEController.emitters.forEach(sseEmitter -> {
+            try {
+                sseEmitter.send(message);
+            } catch (Exception e) {
+                sseEmittersToRemove.add(sseEmitter);
+            }
+        });
+        SSEController.emitters.removeAll(sseEmittersToRemove);
+    }
 
     public List<Message> getAllMessages() {
         return messages;
@@ -18,8 +34,8 @@ public class MessageService {
     public List<Message> getAllMessagesByUserId(long userId) {
         ArrayList<Message> returnMe = new ArrayList<>();
         for (Message p : messages) {
-            if (p.getUserId()==userId) {
-                 returnMe.add(p);
+            if (p.getUserId() == userId) {
+                returnMe.add(p);
             }
         }
         return returnMe;
@@ -27,7 +43,7 @@ public class MessageService {
 
     public Message getMessage(long messageId) {
         for (Message p : messages) {
-            if (p.getMessageId()==messageId) {
+            if (p.getMessageId() == messageId) {
                 return p;
             }
         }
@@ -36,18 +52,19 @@ public class MessageService {
 
     public boolean addMessage(Message message) {
 
-        if (message ==null) {
+        if (message == null) {
             return false;
         }
 
         messages.add(message);
+        updateMainChat(message);
         return true;
     }
 
     public boolean deleteMessage(long messageId) {
 
-        for (Message p : messages){
-            if (p.getMessageId()==messageId){
+        for (Message p : messages) {
+            if (p.getMessageId() == messageId) {
                 messages.remove(p);
                 return true;
             }
@@ -56,9 +73,9 @@ public class MessageService {
         return false;
     }
 
-    public boolean updateMessage(long messageId, Message newMessage){
-        for (Message p : messages){
-            if (p.getMessageId()==messageId){
+    public boolean updateMessage(long messageId, Message newMessage) {
+        for (Message p : messages) {
+            if (p.getMessageId() == messageId) {
                 p.setContent(newMessage.getContent());
                 return true;
             }

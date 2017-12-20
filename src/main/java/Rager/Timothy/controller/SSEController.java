@@ -1,4 +1,4 @@
-package com.example.controller;
+package Rager.Timothy.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
